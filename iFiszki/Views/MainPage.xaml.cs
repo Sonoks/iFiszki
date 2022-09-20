@@ -1,10 +1,9 @@
-﻿using System.Windows.Input;
-
-namespace iFiszki;
+﻿namespace iFiszki;
 
 public partial class MainPage : ContentPage
 {
     private FileDataViewModel ViewModel { get; set; }
+    private Page page;
 
     public MainPage()
 	{
@@ -15,9 +14,13 @@ public partial class MainPage : ContentPage
 
     private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        var item = e.SelectedItem as FileData;
-        Page page = (Page)Activator.CreateInstance(typeof(DictionaryPage), item);
-        await Navigation.PushAsync(page);
+        if (e.SelectedItem != null)
+        {
+            var item = e.SelectedItem as FileData;
+            page = (Page)Activator.CreateInstance(typeof(DictionaryPage), item);
+            await Navigation.PushAsync(page);
+            FilesListView.SelectedItem = null;
+        }
     }
 
     private async void AddBtn_Clicked(object sender, EventArgs e)

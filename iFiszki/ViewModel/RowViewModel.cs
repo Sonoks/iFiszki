@@ -15,6 +15,10 @@ namespace iFiszki
         public IList<Row> Rows { get; private set; }
         public ICommand AddCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }
+
+        public string OriginalWord { get; set; } = "";
+        public string TranslatedWord { get; set; } = "";
+
         public string StrA { get; set; }
         public string StrB { get; set; }
 
